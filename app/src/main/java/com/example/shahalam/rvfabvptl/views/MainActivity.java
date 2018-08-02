@@ -1,4 +1,4 @@
-package com.example.shahalam.rvfabvptl;
+package com.example.shahalam.rvfabvptl.views;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -10,6 +10,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.shahalam.rvfabvptl.adapters.ViewPagerAdapter;
+import com.example.shahalam.rvfabvptl.models.MyDataModel;
+import com.example.shahalam.rvfabvptl.R;
+import com.example.shahalam.rvfabvptl.interfaces.FragmentCommunicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPagerAdapter adapter;
     FragmentCommunicator fragmentCommunicator;
+    static List<MyDataModel> myDataModels = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
                         String titleValue = title.getText().toString();
                         String descriptionValue = description.getText().toString();
-                        Log.d("DATA", "=====" + titleValue + descriptionValue);
-                        List<MyDataModel> myDataModels = new ArrayList<>();
                         MyDataModel model = new MyDataModel(titleValue, descriptionValue);
                         myDataModels.add(model);
-
                         fragmentCommunicator.sendData(myDataModels);
                         dialog.cancel();
                     }

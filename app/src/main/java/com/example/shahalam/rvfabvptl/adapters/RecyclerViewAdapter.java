@@ -1,4 +1,4 @@
-package com.example.shahalam.rvfabvptl;
+package com.example.shahalam.rvfabvptl.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.example.shahalam.rvfabvptl.R;
+import com.example.shahalam.rvfabvptl.models.MyDataModel;
+
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {

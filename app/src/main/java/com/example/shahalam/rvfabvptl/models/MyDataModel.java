@@ -1,4 +1,4 @@
-package com.example.shahalam.rvfabvptl;
+package com.example.shahalam.rvfabvptl.models;
 
 import java.io.Serializable;
 

@@ -1,4 +1,6 @@
-package com.example.shahalam.rvfabvptl;
+package com.example.shahalam.rvfabvptl.interfaces;
+
+import com.example.shahalam.rvfabvptl.models.MyDataModel;
 
 import java.util.List;
 

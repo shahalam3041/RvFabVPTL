@@ -1,4 +1,4 @@
-package com.example.shahalam.rvfabvptl;
+package com.example.shahalam.rvfabvptl.views;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -6,11 +6,15 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
+import com.example.shahalam.rvfabvptl.models.MyDataModel;
+import com.example.shahalam.rvfabvptl.R;
+import com.example.shahalam.rvfabvptl.adapters.RecyclerViewAdapter;
+import com.example.shahalam.rvfabvptl.interfaces.FragmentCommunicator;
+import com.example.shahalam.rvfabvptl.utils.Sharedpreferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +24,6 @@ public class FragmentOne extends Fragment {
     RecyclerView fragOneRecyclerView;
     List<MyDataModel> myDataModels = new ArrayList<>();
     RecyclerViewAdapter adapterFragmentOne = new RecyclerViewAdapter(getActivity(), myDataModels);
-    String title, description;
-
-    FragmentCommunicator fragmentCommunicator;
 
 
     @Nullable
@@ -40,6 +41,7 @@ public class FragmentOne extends Fragment {
         ((MainActivity) getActivity()).passVal(new FragmentCommunicator() {
             @Override
             public void sendData(List<MyDataModel> myDataModels) {
+
                 updateRecyclerView(myDataModels);
             }
         });
