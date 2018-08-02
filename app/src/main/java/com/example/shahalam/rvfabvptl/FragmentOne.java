@@ -47,10 +47,6 @@ public class FragmentOne extends Fragment {
 
 
     public void updateRecyclerView(List<MyDataModel> myDataModels) {
-
-
-        Log.d("onResume", "data=" + myDataModels.size() + "title" + title);
-
         fragOneRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapterFragmentOne = new RecyclerViewAdapter(getContext(), myDataModels);
         fragOneRecyclerView.setAdapter(adapterFragmentOne);
