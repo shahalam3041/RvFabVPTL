@@ -1,6 +1,8 @@
 package com.example.shahalam.rvfabvptl;
 
-public class MyDataModel {
+import java.io.Serializable;
+
+public class MyDataModel implements Serializable{
     private String title, description;
 
     public MyDataModel(String title, String description) {

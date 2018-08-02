@@ -2,25 +2,28 @@ package com.example.shahalam.rvfabvptl;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
 
 
     EditText title, description;
     FloatingActionButton fab;
     ViewPager mPager;
     TabLayout tabLayout;
+    ViewPagerAdapter adapter;
+    FragmentCommunicator fragmentCommunicator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,12 +33,19 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabLayout);
         fab = findViewById(R.id.fab);
 
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
+
+
+        setupViewPager(mPager);
+        tabLayout.setupWithViewPager(mPager);
+
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
-                View mView = getLayoutInflater().inflate(R.layout.dialog_box,null);
+                View mView = getLayoutInflater().inflate(R.layout.dialog_box, null);
 
                 title = mView.findViewById(R.id.titleDialogBox);
                 description = mView.findViewById(R.id.descriptionDialogBox);
@@ -48,28 +58,33 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        FragmentManager fm = getSupportFragmentManager();
-                         FragmentTransaction ft = fm.beginTransaction();
-                         FragmentOne fragOne = new FragmentOne();
-                        Bundle mBundle = new Bundle();
+                        String titleValue = title.getText().toString();
+                        String descriptionValue = description.getText().toString();
+                        Log.d("DATA", "=====" + titleValue + descriptionValue);
+                        List<MyDataModel> myDataModels = new ArrayList<>();
+                        MyDataModel model = new MyDataModel(titleValue, descriptionValue);
+                        myDataModels.add(model);
 
-                        mBundle.putString("title", "Hello Title");    ///title.getText().toString())
-                        mBundle.putString("description","Hello description"); //description.getText().toString()
-
-                        //PASS OVER THE BUNDLE TO OUR FRAGMENT
-                        fragOne.setArguments(mBundle);
-                        ft.add(R.id.linearLayoutFragmentOne,fragOne);
-                        ft.commit();
+                        fragmentCommunicator.sendData(myDataModels);
                         dialog.cancel();
                     }
                 });
             }
         });
 
-        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        mPager.setAdapter(pagerAdapter);
+    }
 
-        tabLayout.setupWithViewPager(mPager);
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFrag(new FragmentOne(), "First Fragment");
+        adapter.addFrag(new FragmentTwo(), "Second Fragment");
+        viewPager.setAdapter(adapter);
+    }
+
+    //Here is new method
+    public void passVal(FragmentCommunicator fragmentCommunicator) {
+        this.fragmentCommunicator = fragmentCommunicator;
 
     }
 
