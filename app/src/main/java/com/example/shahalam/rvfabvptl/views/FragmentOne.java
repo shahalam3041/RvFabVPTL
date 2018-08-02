@@ -14,7 +14,6 @@ import com.example.shahalam.rvfabvptl.models.MyDataModel;
 import com.example.shahalam.rvfabvptl.R;
 import com.example.shahalam.rvfabvptl.adapters.RecyclerViewAdapter;
 import com.example.shahalam.rvfabvptl.interfaces.FragmentCommunicator;
-import com.example.shahalam.rvfabvptl.utils.Sharedpreferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +36,7 @@ public class FragmentOne extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
 
         ((MainActivity) getActivity()).passVal(new FragmentCommunicator() {
             @Override
