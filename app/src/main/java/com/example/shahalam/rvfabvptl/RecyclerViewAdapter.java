@@ -1,0 +1,59 @@
+package com.example.shahalam.rvfabvptl;
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
+    Context mContext;
+    List<MyDataModel> myDataModels;
+
+    public RecyclerViewAdapter(Context mContext, List<MyDataModel> myDataModels) {
+        this.mContext = mContext;
+        this.myDataModels = myDataModels;
+    }
+
+    @NonNull
+    @Override
+    public RecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_item_recyclerview,parent,false);
+        return new MyViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerViewAdapter.MyViewHolder holder, int position) {
+        holder.title.setText(myDataModels.get(position).getTitle());
+        holder.description.setText(myDataModels.get(position).getDescription());
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return myDataModels.size();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView title, description;
+        public MyViewHolder(View itemView) {
+            super(itemView);
+
+            title = itemView.findViewById(R.id.titleInRecyclerViewSingleItem);
+            description = itemView.findViewById(R.id.descriptionInRecyclerViewSingleItem);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, "Clicked.", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+    }
+}
